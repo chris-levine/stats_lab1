@@ -135,7 +135,6 @@ ggplot(cleaned_df, aes(x = child_mortality, y = life_expectancy)) +
        y = "Life Expectancy")
                                                                                 
 # creating a scatter plot with color and size parameters
-
 ggplot(cleaned_df, aes(x = child_mortality, y = life_expectancy,color = continent, size = population)) +
                        geom_jitter(width = 3, height = 3, alpha= 0.75) +
                        labs(title = "Life Expectancy vs Child Mortality by Continent",
@@ -144,7 +143,42 @@ ggplot(cleaned_df, aes(x = child_mortality, y = life_expectancy,color = continen
                        size = "Population",
                        color = "Continent")
 
-                       
+# creating a boxplot of continent and life expectancy
+ggplot(cleaned_df, aes(x=continent, y=life_expectancy)) + 
+  geom_boxplot() +
+  labs(title = "Life Expectancy by Continent",
+       x = "Continent",
+       y = "Life Expectancy")
+  
+# creating bar graphs of counts of continents
+ggplot(data =cleaned_df, mapping = aes(x=continent)) + geom_bar() +
+  labs(title = "Countries in Continents",
+       x = "Continent",
+       y = "Count")
+
+# creating histogram
+ggplot(cleaned_df, aes(x = life_expectancy)) +
+  geom_boxplot(binwidth = 5) +
+  labs(title = "Distribution of Life Expectancy", x = "Life Expectancy")
+
+# creating distribution of life expectancy
+ggplot(cleaned_df, aes(x = life_expectancy)) +
+  histogram(binwidth = 5) +
+  labs(title = "Box Plot of Life Expectancy", x = "Life Expectancy")
+
+# Create the indicator for babies per woman <= 2
+cleaned_df$children_indicator <- ifelse(cleaned_df$babies_per_woman <= 2, "Yes", "No")
+
+# Plot the side-by-side bar graph of continent by children per woman indicator
+ggplot(cleaned_df, aes(x = continent, fill = children_indicator)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Countries by Continent and Babies per Woman Indicator",
+       x = "Continent",
+       y = "Count of Countries",
+       fill = "Babies per Woman <= 2") +
+  theme_minimal()
+
+                      
 
                                                                                 
                                                                                 
